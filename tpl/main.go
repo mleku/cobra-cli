@@ -14,11 +14,7 @@
 package tpl
 
 func MainTemplate() []byte {
-	return []byte(`/*
-{{ .Copyright }}
-{{ if .Legal.Header }}{{ .Legal.Header }}{{ end }}
-*/
-package main
+	return []byte(`package main
 
 import "{{ .PkgName }}/cmd"
 
@@ -29,11 +25,7 @@ func main() {
 }
 
 func RootTemplate() []byte {
-	return []byte(`/*
-{{ .Copyright }}
-{{ if .Legal.Header }}{{ .Legal.Header }}{{ end }}
-*/
-package cmd
+	return []byte(`package cmd
 
 import (
 {{- if .Viper }}
@@ -44,11 +36,7 @@ import (
 {{- if .Viper }}
 	"github.com/spf13/viper"{{ end }}
 )
-
-{{ if .Viper -}}
-var cfgFile string
-{{- end }}
-
+{{ if .Viper -}}var cfgFile string{{- end }}
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "{{ .AppName }}",
@@ -119,11 +107,7 @@ func initConfig() {
 }
 
 func AddCommandTemplate() []byte {
-	return []byte(`/*
-{{ .Project.Copyright }}
-{{ if .Legal.Header }}{{ .Legal.Header }}{{ end }}
-*/
-package cmd
+	return []byte(`package cmd
 
 import (
 	"fmt"
